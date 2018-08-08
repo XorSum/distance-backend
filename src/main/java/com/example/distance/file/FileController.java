@@ -1,13 +1,15 @@
 package com.example.distance.file;
 
 import com.example.distance.utils.result.Result;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.Authorization;
+import io.swagger.annotations.AuthorizationScope;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServlet;
@@ -26,23 +28,17 @@ public class FileController {
     FileService fileService;
 
 
-    /**
-     * @param file
-     * @return Result
-     */
+    @ApiOperation(value = "上传文件", notes = " 返回值的data是文件保存在服务器的路径 ", response = Void.class, tags={ "upload", })
     @RequestMapping(value = "/upload/",method = RequestMethod.POST)
-    public Result upload( MultipartFile file) {
+    public Result upload(@ApiParam(value = "你想上传的文件" ,required=true ) @RequestParam MultipartFile file) {
+
        return fileService.upload(file);
     }
 
-    /**
-     * @param filePath
-     * @param request
-     * @param response
-     * @return
-     */
+
+    @ApiOperation(value = "下载文件图片", notes = "notes", response = Void.class, tags={ "download", })
     @RequestMapping(value = "/download/{filePath}",method = RequestMethod.GET)
-    public Result downloadFile( @PathVariable String filePath, HttpServletRequest request, HttpServletResponse response) {
+    public Result downloadFile(@ApiParam(value = "文件路经" ,required=true ) @PathVariable String filePath, HttpServletRequest request, HttpServletResponse response) {
         return fileService.downloadFile(filePath,request,response);
     }
 

@@ -12,5 +12,9 @@ public class SuccessResult<T> extends Result {
         this.message="success";
         this.data=data;
     }
-
+    public SuccessResult(){
+        this.status=1;
+        this.message="success";
+        this.data=1;
+    }
 }
