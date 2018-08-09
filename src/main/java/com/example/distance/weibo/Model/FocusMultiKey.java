@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class FocusMultiKey implements Serializable {
 
     private Integer userId;
-    private Integer VId;
+    private Integer vId;
 
     //  ***重写hashCode与equals方法***
 
@@ -23,7 +23,7 @@ public class FocusMultiKey implements Serializable {
         final int PRIME = 31;
         int result = 1;
         result = PRIME * result + ((userId == null) ? 0 : userId.hashCode());
-        result = PRIME * result + ((VId == null) ? 0 : VId.hashCode());
+        result = PRIME * result + ((vId == null) ? 0 : vId.hashCode());
         return result;
     }
 
@@ -48,11 +48,11 @@ public class FocusMultiKey implements Serializable {
         }else if(!userId.equals(other.userId)){
             return false;
         }
-        if(VId == null){
-            if(other.VId != null){
+        if(vId == null){
+            if(other.vId != null){
                 return false;
             }
-        }else if(!VId.equals(other.VId)){
+        }else if(!vId.equals(other.vId)){
             return false;
         }
         return true;
@@ -70,10 +70,10 @@ public class FocusMultiKey implements Serializable {
     }
 
     public Integer getVId() {
-        return VId;
+        return vId;
     }
 
     public void setVId(Integer VId) {
-        this.VId = VId;
+        this.vId = VId;
     }
 }

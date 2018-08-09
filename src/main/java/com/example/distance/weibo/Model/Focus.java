@@ -14,7 +14,7 @@ public class Focus {
     private Integer userId;
 
     @Id
-    private Integer VId;
+    private Integer vId;
 
     private Date focusDate ;
 
@@ -30,11 +30,11 @@ public class Focus {
     }
 
     public Integer getVId() {
-        return VId;
+        return vId;
     }
 
     public void setVId(Integer VId) {
-        this.VId = VId;
+        this.vId = VId;
     }
 
     public Date getFocusDate() {

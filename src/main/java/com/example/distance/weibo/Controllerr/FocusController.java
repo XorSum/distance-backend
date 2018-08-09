@@ -1,42 +1,51 @@
 package com.example.distance.weibo.Controllerr;
 
 import com.example.distance.utils.result.Result;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.example.distance.weibo.service.FocusService;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+@RestController
 @RequestMapping("/focus/")
 public class FocusController {
 
+    @Autowired
+    FocusService focusService;
+
+    @ApiOperation(value = "添加关注",notes = "user关注大V")
     @PostMapping(value = "/add/")
-    public Result add(String token, String VId){
+    public Result add(Integer userId, Integer vId) {
         // 关注了大V
-        return null;
+        return focusService.add(userId, vId);
     }
 
+    @ApiOperation(value = "取消关注",notes = "user取关大V")
     @DeleteMapping(value = "/del/")
-    public Result del(String token, String VId){
+    public Result del(Integer userId, Integer vId) {
         // 取关了大V
-        return null;
+        return focusService.del(userId, vId);
     }
 
+    @ApiOperation(value = "获取关注列表",notes = "查看user的关注情况")
     @GetMapping(value = "/Vlist/")
-    public Result getFocueList(String token){
+    public Result getFocueList(Integer userId) {
         // 获取关注列表，里面存这大V们的id
-        return null;
+        return focusService.getFocueList(userId);
     }
 
-    @GetMapping(value = "/WBlist/")
-    public Result getWBList(String token){
-        // 获取关注的大V发送的微博 ， 算法有待实现
-        return null;
-    }
-
-    @GetMapping(value = "/Recomdandlist/")
-    public Result getRecomdandList(String token){
-        // 获取系统推荐的微博 ， 算法有待实现
-        return null;
-    }
+//    @ApiOperation(value = "",notes = "")
+//    @GetMapping(value = "/WBlist/")
+//    public Result getWBList(String token) {
+//        // 获取关注的大V发送的微博 ， 算法有待实现
+//        return null;
+//    }
+//
+//    @ApiOperation(value = "",notes = "")
+//    @GetMapping(value = "/Recomdandlist/")
+//    public Result getRecomdandList(String token) {
+//        // 获取系统推荐的微博 ， 算法有待实现
+//        return null;
+//    }
 
 }

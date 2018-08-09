@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FocusRepository extends JpaRepository<Focus,FocusMultiKey> {
 
-
+    Focus findByUserIdAndVId(Integer userId,Integer vId);
+    Iterable<Focus> findAllByUserId(Integer userId);
 
 }
