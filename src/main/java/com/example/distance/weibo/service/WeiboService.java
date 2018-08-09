@@ -56,7 +56,9 @@ public class WeiboService {
 
     public Result delPic(Integer userId, Integer weiboId, String picPath) {
 
-        WeiboPicture weiboPicture = wpRspository.findOneByPicPathAndWeiboId(picPath, weiboId);
+        WeiboPicture weiboPicture = wpRspository.findByWeiboIdAndPicPath(weiboId,picPath);
+        if (weiboPicture==null)
+            return new ErrorResult();
         wpRspository.delete(weiboPicture);
         return new SuccessResult();
 

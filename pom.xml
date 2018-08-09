@@ -80,7 +80,7 @@
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
-			<version>${javamail.version}</version>
+			<version>1.5.0</version>
 		</dependency>
 
 		<dependency>

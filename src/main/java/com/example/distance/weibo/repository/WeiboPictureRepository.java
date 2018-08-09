@@ -10,9 +10,7 @@ import java.util.List;
 public interface WeiboPictureRepository extends JpaRepository<WeiboPicture,Integer>{
 
     Iterable<WeiboPicture> findAllByWeiboId(Integer weiboId);
-    Iterable<String> findPicPathByWeiboId(Integer weiboId);
     Iterable<WeiboPicture> findAllByPicPath(String picPath);
-    WeiboPicture findOneByPicPathAndWeiboId(String picPath,Integer weiboId);
-
+    WeiboPicture findByWeiboIdAndPicPath(Integer weiboId,String picPath);
 
 }
