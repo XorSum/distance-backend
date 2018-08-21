@@ -17,7 +17,14 @@ spring:
     multipart:
       enabled: true
       max-file-size: 50mb
-
       max-request-size: 50mb
 server:
   port: 8086
+
+alisms:
+  product: Dysmsapi
+  domain: dysmsapi.aliyuncs.com
+  accessKeyId: 123
+  accessKeySecret: 123
+  signName: 123
+  templateCode: SMS_123
