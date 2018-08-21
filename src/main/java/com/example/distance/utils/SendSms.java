@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import javax.validation.Valid;
 
 @Component
-@ConfigurationProperties(prefix = "alisms")
 public class SendSms {
 
     private static String product ;//短信API产品名称（短信产品名固定，无需修改）
@@ -30,31 +29,39 @@ public class SendSms {
     @Value("${alisms.product}")
     public void setProduct(String pro) {
         product = pro;
+        System.out.println(product);
     }
     @Value("${alisms.domain}")
     public void setDomain(String dom) {
         domain = dom;
+        System.out.println(domain);
     }
 
     @Value("${alisms.accessKeyId}")
     public void setAccessKeyId(String KeyId) {
         accessKeyId = KeyId;
+        System.out.println(accessKeyId);
     }
 
-    @Value("${alisms.accessKeySecre")
+    @Value("${alisms.accessKeySecret}")
     public void setAccessKeySecret(String secret) {
         accessKeySecret = secret;
+        System.out.println(accessKeySecret);
     }
 
-    @Value("${alisms.signName")
+    @Value("${alisms.signName}")
     public void setSignName(String sign) {
         signName = sign;
+        System.out.println(signName);
     }
 
-    @Value("${alisms.accessKeySecre")
+    @Value("${alisms.templateCode}")
     public void setTemplateCode(String temp) {
         templateCode = temp;
+        System.out.println(templateCode);
     }
+
+
 
 
     public static boolean send(String phoneNumbers, String code) {

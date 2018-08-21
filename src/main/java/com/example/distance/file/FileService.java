@@ -4,6 +4,7 @@ import com.example.distance.utils.MD5;
 import com.example.distance.utils.result.ErrorResult;
 import com.example.distance.utils.result.Result;
 import com.example.distance.utils.result.SuccessResult;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,7 +15,8 @@ import java.io.*;
 @Service
 public class FileService {
 
-    private String uploadDir = "/home/han/Documents/distance/fileDir/";
+    @Value("${file.uploadDir}")
+    private String uploadDir ;
 
     public Result upload( MultipartFile file)  {
         if (file.isEmpty()) {
@@ -23,7 +25,7 @@ public class FileService {
 
         String fileName = file.getOriginalFilename();
 
-        String md5fileName = MD5.getMD5(file);
+        String md5fileName = MD5.file(file);
         if (md5fileName==null){
             return new ErrorResult();
         }
@@ -31,7 +33,7 @@ public class FileService {
        // System.out.println("the file name is " + fileName);
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
        // System.out.println("the suffix file name is  " + suffixName);
-        String filePath =   md5fileName  +  suffixName;
+        String filePath =  "/" + md5fileName  +  suffixName;
         File dest = new File( uploadDir + filePath);
         if (!dest.getParentFile().exists()) {
             dest.getParentFile().mkdirs();

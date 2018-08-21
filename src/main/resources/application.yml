@@ -28,3 +28,6 @@ alisms:
   accessKeySecret: 123
   signName: 123
   templateCode: SMS_123
+
+file:
+  uploadDir: /distance/
