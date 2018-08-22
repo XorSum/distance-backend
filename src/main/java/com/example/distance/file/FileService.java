@@ -33,8 +33,8 @@ public class FileService {
        // System.out.println("the file name is " + fileName);
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
        // System.out.println("the suffix file name is  " + suffixName);
-        String filePath =  "/" + md5fileName  +  suffixName;
-        File dest = new File( uploadDir + filePath);
+        String filePath =   md5fileName  +  suffixName;
+        File dest = new File( uploadDir + "/" + filePath);
         if (!dest.getParentFile().exists()) {
             dest.getParentFile().mkdirs();
         }

@@ -4,8 +4,8 @@ package com.example.distance.utils.result;
 public class Result<T> {
 
     protected int status;
-    protected  String message;
-    protected  T data;
+    protected String message;
+    protected T data;
 
     public Result() {
     }
@@ -15,6 +15,40 @@ public class Result<T> {
         this.message = message;
         this.data = data;
     }
+
+    public static <T> Result<T> success(T data) {
+        Result<T> result = new Result<>();
+        result.setStatus(1);
+        result.setMessage("success");
+        result.setData(data);
+        return result;
+    }
+
+    public static <T> Result<T> success(T data, String msg) {
+        Result<T> result = new Result<>();
+        result.setStatus(1);
+        result.setMessage(msg);
+        result.setData(data);
+        return result;
+    }
+
+    public static <Integer> Result<Integer> error() {
+        Result<Integer> result = new Result<Integer>();
+        result.setStatus(0);
+        result.setMessage("不用慌，问题很大，慌也没用");
+        result.setData(0);
+        return result;
+    }
+
+
+    public static <Integer> Result<Integer> error(String err) {
+        Result<Integer> result = new Result<Integer>();
+        result.setStatus(0);
+        result.setMessage(err);
+        result.setData(0);
+        return result;
+    }
+
 
     public int getStatus() {
         return status;
@@ -38,5 +72,9 @@ public class Result<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public void setData(Integer data) {
+        this.data = (T) data;
     }
 }

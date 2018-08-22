@@ -10,7 +10,7 @@ public class ErrorResult extends Result {
 
     public ErrorResult(){
         this.status=0;
-        this.message="error";
+        this.message="不用慌，问题很大，慌也没用";
         this.data=0;
     }
 }
