@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(filterName = "JwtFilter",urlPatterns = {"/*"})
+@WebFilter(filterName = "JwtFilter", urlPatterns = {"/*"})
 public class JwtFliter implements Filter {
 
     @Override
@@ -20,13 +20,21 @@ public class JwtFliter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
 
     }
+
     @Override
     public void doFilter(ServletRequest arg0, ServletResponse arg1,
                          FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) arg0;
         HttpServletResponse response = (HttpServletResponse) arg1;
-        if (request.getRequestURI().startsWith("/sign/") || request.getRequestURI().startsWith("/static/")) {
+        System.out.println(request.getRequestURI());
+        if (request.getRequestURI().startsWith("/sign/")
+                || request.getRequestURI().startsWith("/static/")
+                || request.getRequestURI().startsWith("/swagger")
+                || request.getRequestURI().startsWith("/webjars")
+                || request.getRequestURI().startsWith("/v2/")
+                ) {
             // 登录或者获取静态资源， 直接放行
+
         } else {
             String jwt = null;
             try {
