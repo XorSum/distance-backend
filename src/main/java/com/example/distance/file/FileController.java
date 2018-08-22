@@ -30,7 +30,8 @@ public class FileController {
 
     @ApiOperation(value = "上传文件", notes = " 返回值的data是文件保存在服务器的路径 ", response = Void.class)
     @RequestMapping(value = "/upload/",method = RequestMethod.POST)
-    public Result upload(@ApiParam(value = "你想上传的文件" ,required=true ) @RequestParam MultipartFile file) {
+    public Result upload(@ApiParam(value = "jwt" ,required=true ) @RequestParam String jwt,
+                         @ApiParam(value = "你想上传的文件" ,required=true ) @RequestParam MultipartFile file) {
 
        return fileService.upload(file);
     }
@@ -38,7 +39,8 @@ public class FileController {
 
     @ApiOperation(value = "下载文件图片", notes = "notes", response = Void.class)
     @RequestMapping(value = "/download/{filePath}",method = RequestMethod.GET)
-    public Result downloadFile(@ApiParam(value = "文件路经" ,required=true ) @PathVariable String filePath, HttpServletRequest request, HttpServletResponse response) {
+    public Result downloadFile(@ApiParam(value = "jwt" ,required=true ) @RequestParam String jwt,
+                               @ApiParam(value = "文件路经" ,required=true ) @PathVariable String filePath, HttpServletRequest request, HttpServletResponse response) {
         return fileService.downloadFile(filePath,request,response);
     }
 

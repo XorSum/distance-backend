@@ -96,7 +96,8 @@ public class WeiboController {
 
     @ApiOperation(value = "获取图片", notes = " 获取一个微博的所有图片的路径 ", response = Array.class)
     @GetMapping(value = "/pictures/")
-    public Result getPictures(@ApiParam(value = "微博的id" ,required=true ) @RequestParam Integer weiboId) {
+    public Result getPictures(@ApiParam(value = "jwt" ,required=true ) @RequestParam String jwt,
+                              @ApiParam(value = "微博的id" ,required=true ) @RequestParam Integer weiboId) {
         // 这个只返回一个图片名称的列表， 前端还需要去 /file/download/接口下载图片
         return weiboService.getPictures(weiboId);
     }

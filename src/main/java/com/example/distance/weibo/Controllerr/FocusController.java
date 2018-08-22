@@ -43,7 +43,8 @@ public class FocusController {
 
     @ApiOperation(value = "获取关注列表",notes = "查看user的关注情况")
     @GetMapping(value = "/Vlist/")
-    public Result getFocueList(@ApiParam(value = "用户的id" ,required=true ) @RequestParam Integer userId) {
+    public Result getFocueList(@ApiParam(value = "jwt" ,required=true ) @RequestParam String jwt,
+                               @ApiParam(value = "用户的id" ,required=true ) @RequestParam Integer userId) {
         // 获取关注列表，里面存这大V们的id
         return focusService.getFocueList(userId);
     }
