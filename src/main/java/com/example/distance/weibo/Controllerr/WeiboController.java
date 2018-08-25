@@ -35,7 +35,8 @@ public class WeiboController {
 
     @ApiOperation(value = "获取微博", notes = " 获取一个微博除了图片以外的所有内容 ", response = Weibo.class)
     @GetMapping(value = "/weibo/")
-    public Result getWeibo(Integer weiboId) {
+    public Result getWeibo(@ApiParam(value = "jwt" ,required=true ) @RequestParam String jwt,
+                           @ApiParam(value = "微博的id" ,required=true ) @RequestParam  Integer weiboId) {
         return weiboService.getWeibo(weiboId);
     }
 
