@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Time;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 @Service
@@ -69,6 +70,13 @@ public class WeiboService {
         if (weibo == null)
             return new ErrorResult();
         return new SuccessResult(weibo);
+    }
+
+    public Result getAllWeibo() {
+        List<Weibo> weibos = weiboRepository.findAll();
+        if (weibos == null)
+            return new ErrorResult();
+        return new SuccessResult(weibos);
     }
 
     public Result getPictures(Integer weiboId) {

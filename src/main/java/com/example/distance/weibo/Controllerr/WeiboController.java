@@ -40,6 +40,12 @@ public class WeiboController {
         return weiboService.getWeibo(weiboId);
     }
 
+    @ApiOperation(value = "获取所有微博", notes = " 获取所有微博除了图片以外的所有内容 ", response = Weibo.class)
+    @GetMapping(value = "/all/")
+    public Result getAllWeibo(@ApiParam(value = "jwt" ,required=true ) @RequestParam String jwt) {
+        return weiboService.getAllWeibo();
+    }
+
 
     @ApiOperation(value = "创建空微博", notes = " 创建一个空的微博，之后使用调用另外几个接口进行添加图片和内容 ", response = Weibo.class)
     @PostMapping(value = "/create/")
