@@ -1,10 +1,6 @@
 package com.example.distance.weibo.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.sql.Time;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -16,10 +12,21 @@ public class Weibo {
 
     private int userId;
     private String userName;
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "Text")
     private String content; // 文字内容
+
     private Date date;  // 发送的时间
 
     public Weibo() {
+        this.date = new Date();
+    }
+
+    public Weibo(int userId) {
+        this.userId = userId;
+        this.date = new Date();
     }
 
     public int getWeiboId() {

@@ -26,9 +26,7 @@ public class WeiboService {
     WeiboPictureRepository wpRspository;
 
     public Result createWeibo(Integer userId) {
-        Weibo weibo = new Weibo();
-        weibo.setDate(new Date());
-        weibo.setUserId(userId);
+        Weibo weibo = new Weibo(userId);
         weibo.setUserName(" userName ");
         weiboRepository.save(weibo);
         return new SuccessResult(weibo);
