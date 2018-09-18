@@ -1,5 +1,7 @@
 package com.example.distance.weibo.service;
 
+import com.example.distance.sign.model.User;
+import com.example.distance.sign.repository.UserRepository;
 import com.example.distance.utils.result.ErrorResult;
 import com.example.distance.utils.result.Result;
 import com.example.distance.utils.result.SuccessResult;
@@ -19,6 +21,9 @@ public class CommentService {
     @Autowired
     WeiboRepository weiboRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     public Result addComment(Integer userId,Integer weiboId,String content){
         try {
             if (content==null||content.equals("")){
@@ -28,7 +33,8 @@ public class CommentService {
             if (weibo==null){
                 return new ErrorResult("没有这个微博");
             }else {
-                Comment comment = new Comment(userId, weibo.getUserId(), weiboId, content);
+                User user = userRepository.findOneById(userId);
+                Comment comment = new Comment(userId,user.getUserName(), weibo.getUserId(), weiboId, content);
                 commentRepository.save(comment);
                 return new SuccessResult(comment);
             }

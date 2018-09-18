@@ -1,4 +1,4 @@
-package com.example.distance.login.model;
+package com.example.distance.sign.model;
 
 
 
@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class UserPassword {
+public class User {
 
     @Id
     @GeneratedValue
@@ -15,6 +15,7 @@ public class UserPassword {
     private String phonenumber;       //手机号
     private String salt;              //盐
     private String password;          //密码
+    private String userName;
 
     public Integer getId() {
         return id;
@@ -48,12 +49,21 @@ public class UserPassword {
         this.password = password;
     }
 
-    public UserPassword() {
+    public User() {
     }
 
-    public UserPassword(String phonenumber, String salt, String password) {
+    public User(String phonenumber, String salt, String password, String userName) {
         this.phonenumber = phonenumber;
         this.salt = salt;
         this.password = password;
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

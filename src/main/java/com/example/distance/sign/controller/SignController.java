@@ -1,7 +1,7 @@
-package com.example.distance.login.controller;
+package com.example.distance.sign.controller;
 
 
-import com.example.distance.login.service.SignService;
+import com.example.distance.sign.service.SignService;
 import com.example.distance.utils.result.Result;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -39,8 +39,9 @@ public class SignController {
     @PostMapping(value = "/up/")
     public Result signup(@ApiParam(value = "手机号" ,required=true )  @RequestParam String phonenumber,
                          @ApiParam(value = "验证码" ,required=true )  @RequestParam String provenum,
-                         @ApiParam(value = "密码（建议取MD5值） " ,required=true ) @RequestParam String password) {
-        return signService.proveAndSignin(phonenumber,provenum,password);
+                         @ApiParam(value = "密码（建议取MD5值） " ,required=true ) @RequestParam String password,
+                         @ApiParam(value = "用户名" ,required=true )  @RequestParam String userName) {
+        return signService.proveAndSignup(phonenumber,provenum,password,userName);
     }
 
 }

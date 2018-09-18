@@ -1,7 +1,7 @@
-package com.example.distance.login.repository;
+package com.example.distance.sign.repository;
 
 
-import com.example.distance.login.model.ProveNumber;
+import com.example.distance.sign.model.ProveNumber;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

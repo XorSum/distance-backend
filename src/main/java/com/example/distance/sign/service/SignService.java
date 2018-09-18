@@ -1,10 +1,10 @@
-package com.example.distance.login.service;
+package com.example.distance.sign.service;
 
 
-import com.example.distance.login.model.ProveNumber;
-import com.example.distance.login.model.UserPassword;
-import com.example.distance.login.repository.ProveNumberRepository;
-import com.example.distance.login.repository.UserPasswordRepository;
+import com.example.distance.sign.model.ProveNumber;
+import com.example.distance.sign.model.User;
+import com.example.distance.sign.repository.ProveNumberRepository;
+import com.example.distance.sign.repository.UserRepository;
 import com.example.distance.utils.JwtUtils;
 import com.example.distance.utils.MD5;
 import com.example.distance.utils.SendSms;
@@ -21,16 +21,16 @@ public class SignService {
     ProveNumberRepository proveNumberRepository;
 
     @Autowired
-    UserPasswordRepository userPasswordRepository;
+    UserRepository userRepository;
 
 
     public Result signin(String phonenumber,String firstpassword){
         try{
-            UserPassword userPassword= userPasswordRepository.findByPhonenumber(phonenumber);
-            if (userPassword!=null) {
-                String password = MD5.string(firstpassword + userPassword.getSalt());
-                if (password.equals(userPassword.getPassword())) {
-                    String token = JwtUtils.createToken(userPassword.getId());
+            User user = userRepository.findByPhonenumber(phonenumber);
+            if (user !=null) {
+                String password = MD5.string(firstpassword + user.getSalt());
+                if (password.equals(user.getPassword())) {
+                    String token = JwtUtils.createToken(user.getId());
                     return Result.success(token);
                 } else {
                     return Result.error("用户名或密码错误");
@@ -47,7 +47,7 @@ public class SignService {
     public Result sendSMS(String phonenumber){
         System.out.println(phonenumber);
         try {
-            if (userPasswordRepository.findByPhonenumber(phonenumber) == null){
+            if (userRepository.findByPhonenumber(phonenumber) == null){
                 String randomnum= RandomStringUtils.randomNumeric(6);
                 if (SendSms.send(phonenumber,randomnum)==true){
                     ProveNumber proveNumber = new ProveNumber(phonenumber,randomnum);
@@ -67,12 +67,12 @@ public class SignService {
     }
 
 
-    public Result proveAndSignin(String phonenumber, String provenum,  String password){
+    public Result proveAndSignup(String phonenumber, String provenum,  String password,String userName){
         try {
             if (proveNumberRepository.findByPhonenumberAndProvenum(phonenumber, provenum) != null) {
                 String salt= RandomStringUtils.randomAlphanumeric(10);
-                UserPassword userPassword=new UserPassword(phonenumber,salt,MD5.string(password+salt));
-                userPasswordRepository.save(userPassword);
+                User user =new User(phonenumber,salt,MD5.string(password+salt),userName);
+                userRepository.save(user);
                 return Result.success("用户注册成功");
             } else{
                 return Result.error("验证码错误");

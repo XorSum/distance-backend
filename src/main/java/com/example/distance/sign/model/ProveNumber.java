@@ -1,4 +1,4 @@
-package com.example.distance.login.model;
+package com.example.distance.sign.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

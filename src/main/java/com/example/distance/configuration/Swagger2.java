@@ -37,7 +37,7 @@ public class Swagger2 {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 //页面标题
-                .title("Spring Boot 测试使用 Swagger2 构建RESTful API")
+                .title("DISTANCE远方旅游助手API手册")
                 //创建人
                 .contact("han777404")
                 //版本号

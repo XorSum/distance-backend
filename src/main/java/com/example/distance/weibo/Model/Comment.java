@@ -14,6 +14,7 @@ public class Comment {
 
 
     private Integer userId;  // 发出评论的人
+    private String userName; // 发出评论的人的用户名
     private Integer ownerId; // 被评论的人
     private Integer weiboId; // 被评论的微博
 
@@ -26,12 +27,21 @@ public class Comment {
         this.date = new Date();
     }
 
-    public Comment(Integer userId,Integer ownerId,Integer weiboId,String content){
+    public Comment(Integer userId,String userName,Integer ownerId,Integer weiboId,String content){
         this.userId = userId;
+        this.userName = userName;
         this.ownerId = ownerId;
         this.weiboId = weiboId;
         this.content = content;
         this.date = new Date();
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Integer getCommentId() {
