@@ -43,8 +43,8 @@ public class SignController {
     }
 
     @ApiOperation(value = "重命名", notes = " 用户更改名字 ", response = Result.class)
-    @GetMapping(value = "/rename/")
-    public Result getWeibo(@ApiParam(value = "jwt" ,required=true ) @RequestParam String jwt,
+    @PutMapping(value = "/rename/")
+    public Result reName(@ApiParam(value = "jwt" ,required=true ) @RequestParam String jwt,
                            @ApiParam(value = "新名字" ,required=true ) @RequestParam  String userName) {
         try{
             Integer userId = JwtUtils.getUserId(jwt);
