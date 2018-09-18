@@ -3,9 +3,9 @@ package com.example.distance.utils.result;
 
 public class Result<T> {
 
-    protected int status;
-    protected String message;
-    protected T data;
+    private int status;
+    private String message;
+    private T data;
 
     public Result() {
     }
@@ -14,6 +14,14 @@ public class Result<T> {
         this.status = status;
         this.message = message;
         this.data = data;
+    }
+
+    public static  Result success() {
+        Result result = new Result<>();
+        result.setStatus(1);
+        result.setMessage("success");
+        result.setData(1);
+        return result;
     }
 
     public static <T> Result<T> success(T data) {

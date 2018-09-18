@@ -1,8 +1,6 @@
 package com.example.distance.weibo.service;
 
-import com.example.distance.utils.result.ErrorResult;
 import com.example.distance.utils.result.Result;
-import com.example.distance.utils.result.SuccessResult;
 import com.example.distance.weibo.Model.Focus;
 import com.example.distance.weibo.repository.FocusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +21,10 @@ public class FocusService {
             focus.setVId(vId);
             focus.setFocusDate(new Date());
             focusRepository.save(focus);
-            return new SuccessResult(focus);
+            return Result.success(focus);
         }catch (Exception e){
             e.printStackTrace();
-            return new ErrorResult(e.getMessage());
+            return Result.error(e.getMessage());
         }
     }
 
@@ -34,12 +32,12 @@ public class FocusService {
         try {
             Focus focus = focusRepository.findByUserIdAndVId(userId,vId);
             if (focus==null){
-                return new ErrorResult("并未关注");
+                return Result.error("并未关注");
             }
             focusRepository.delete(focus);
-            return new SuccessResult("取关成功");
+            return Result.success("取关成功");
         }catch (Exception e){
-            return new ErrorResult(e.getMessage());
+            return Result.error(e.getMessage());
         }
     }
 
@@ -47,11 +45,11 @@ public class FocusService {
         try {
             Iterable<Focus> focuses = focusRepository.findAllByUserId(userId);
             if (focuses==null){
-                return new ErrorResult("查询失败");
+                return Result.error("查询失败");
             }
-            return new SuccessResult(focuses);
+            return Result.success(focuses);
         }catch (Exception e){
-            return new ErrorResult(e.getMessage());
+            return Result.error(e.getMessage());
         }
     }
 

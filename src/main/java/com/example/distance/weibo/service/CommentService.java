@@ -2,9 +2,7 @@ package com.example.distance.weibo.service;
 
 import com.example.distance.sign.model.User;
 import com.example.distance.sign.repository.UserRepository;
-import com.example.distance.utils.result.ErrorResult;
 import com.example.distance.utils.result.Result;
-import com.example.distance.utils.result.SuccessResult;
 import com.example.distance.weibo.Model.Comment;
 import com.example.distance.weibo.Model.Weibo;
 import com.example.distance.weibo.repository.CommentRepository;
@@ -27,20 +25,20 @@ public class CommentService {
     public Result addComment(Integer userId,Integer weiboId,String content){
         try {
             if (content==null||content.equals("")){
-                return new ErrorResult("内容为空");
+                return Result.error("内容为空");
             }
             Weibo weibo = weiboRepository.findOneByWeiboId(weiboId);
             if (weibo==null){
-                return new ErrorResult("没有这个微博");
+                return Result.error("没有这个微博");
             }else {
                 User user = userRepository.findOneById(userId);
                 Comment comment = new Comment(userId,user.getUserName(), weibo.getUserId(), weiboId, content);
                 commentRepository.save(comment);
-                return new SuccessResult(comment);
+                return Result.success(comment);
             }
         }catch (Exception e){
             e.printStackTrace();
-            return new ErrorResult();
+            return Result.error();
         }
     }
 
@@ -48,13 +46,13 @@ public class CommentService {
         try{
             Iterable<Comment> comments = commentRepository.findAllByWeiboIdOrderByDate(weiboId);
             if (comments==null) {
-                return new ErrorResult("没有这个微博");
+                return Result.error("没有这个微博");
             }else {
-                return new SuccessResult(comments);
+                return Result.success(comments);
             }
         }catch (Exception e){
             e.printStackTrace();
-            return new ErrorResult();
+            return Result.error();
         }
     }
 
@@ -62,13 +60,13 @@ public class CommentService {
         try{
             Comment comment = commentRepository.findOneByCommentId(commentId);
             if (comment==null) {
-                return new ErrorResult("没有这个评论");
+                return Result.error("没有这个评论");
             }else {
-                return new SuccessResult(comment);
+                return Result.success(comment);
             }
         }catch (Exception e){
             e.printStackTrace();
-            return new ErrorResult();
+            return Result.error();
         }
     }
 
@@ -76,14 +74,14 @@ public class CommentService {
         try {
            Comment comment = commentRepository.findOneByCommentId(commentId);
             if (comment==null){
-                return new ErrorResult("没有这个评论");
+                return Result.error("没有这个评论");
             }else {
                 commentRepository.delete(comment);
-                return new SuccessResult(comment);
+                return Result.success(comment);
             }
         }catch (Exception e){
             e.printStackTrace();
-            return new ErrorResult();
+            return Result.error();
         }
     }
 

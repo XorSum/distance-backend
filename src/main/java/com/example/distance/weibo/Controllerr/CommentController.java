@@ -1,7 +1,6 @@
 package com.example.distance.weibo.Controllerr;
 
 import com.example.distance.utils.JwtUtils;
-import com.example.distance.utils.result.ErrorResult;
 import com.example.distance.utils.result.Result;
 import com.example.distance.weibo.service.CommentService;
 import io.swagger.annotations.ApiOperation;
@@ -24,7 +23,7 @@ public class CommentController {
         try{
             return commentService.getAllComments(weiboId);
         }catch (Exception e){
-            return new ErrorResult();
+            return Result.error();
         }
     }
 
@@ -38,7 +37,7 @@ public class CommentController {
             Integer userId = JwtUtils.getUserId(jwt);
             return commentService.addComment(userId,weiboId,content);
         }catch (Exception e){
-            return new ErrorResult();
+            return Result.error();
         }
     }
 
@@ -49,7 +48,7 @@ public class CommentController {
         try{
             return commentService.delComment(commentId);
         }catch (Exception e){
-            return new ErrorResult();
+            return Result.error();
         }
     }
 

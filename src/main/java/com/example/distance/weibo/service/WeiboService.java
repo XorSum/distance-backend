@@ -1,8 +1,6 @@
 package com.example.distance.weibo.service;
 
-import com.example.distance.utils.result.ErrorResult;
 import com.example.distance.utils.result.Result;
-import com.example.distance.utils.result.SuccessResult;
 import com.example.distance.weibo.Model.Weibo;
 import com.example.distance.weibo.Model.WeiboPicture;
 import com.example.distance.weibo.repository.WeiboPictureRepository;
@@ -29,17 +27,17 @@ public class WeiboService {
         Weibo weibo = new Weibo(userId);
         weibo.setUserName(" userName ");
         weiboRepository.save(weibo);
-        return new SuccessResult(weibo);
+        return Result.success(weibo);
     }
 
 
     public Result setContent(Integer userId, Integer weiboId, String content) {
         Weibo weibo = weiboRepository.findOneByWeiboId(weiboId);
         if (weibo == null)
-            return new ErrorResult();
+            return Result.error();
         weibo.setContent(content);
         weiboRepository.save(weibo);
-        return new SuccessResult(weibo);
+        return Result.success(weibo);
     }
 
     public Result addPic(Integer userId, Integer weiboId, String picPath) {
@@ -50,36 +48,36 @@ public class WeiboService {
         weiboPicture.setUserId(userId);
         wpRspository.save(weiboPicture);
 
-        return new SuccessResult();
+        return Result.success();
     }
 
     public Result delPic(Integer userId, Integer weiboId, String picPath) {
 
         WeiboPicture weiboPicture = wpRspository.findByWeiboIdAndPicPath(weiboId,picPath);
         if (weiboPicture==null)
-            return new ErrorResult();
+            return Result.error();
         wpRspository.delete(weiboPicture);
-        return new SuccessResult();
+        return Result.success();
 
     }
 
     public Result getWeibo(Integer weiboId) {
         Weibo weibo = weiboRepository.findOneByWeiboId(weiboId);
         if (weibo == null)
-            return new ErrorResult();
-        return new SuccessResult(weibo);
+            return Result.error();
+        return Result.success(weibo);
     }
 
     public Result getAllWeibo() {
         List<Weibo> weibos = weiboRepository.findAll();
         if (weibos == null)
-            return new ErrorResult();
-        return new SuccessResult(weibos);
+            return Result.error();
+        return Result.success(weibos);
     }
 
     public Result getPictures(Integer weiboId) {
         Iterable<WeiboPicture> ret = wpRspository.findAllByWeiboId(weiboId);
-        return new SuccessResult(ret);
+        return Result.success(ret);
     }
 
 

@@ -2,7 +2,6 @@ package com.example.distance.weibo.Controllerr;
 
 import com.example.distance.utils.JwtUtils;
 import com.example.distance.utils.result.Result;
-import com.example.distance.utils.result.SuccessResult;
 import com.example.distance.weibo.Model.Weibo;
 import com.example.distance.weibo.service.WeiboService;
 import io.swagger.annotations.Api;

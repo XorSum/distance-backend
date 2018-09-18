@@ -1,9 +1,7 @@
 package com.example.distance.file;
 
 import com.example.distance.utils.MD5;
-import com.example.distance.utils.result.ErrorResult;
 import com.example.distance.utils.result.Result;
-import com.example.distance.utils.result.SuccessResult;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,14 +18,14 @@ public class FileService {
 
     public Result upload( MultipartFile file)  {
         if (file.isEmpty()) {
-            return new ErrorResult("file is empty");
+            return Result.error("file is empty");
         }
 
         String fileName = file.getOriginalFilename();
 
         String md5fileName = MD5.file(file);
         if (md5fileName==null){
-            return new ErrorResult();
+            return Result.error();
         }
 
        // System.out.println("the file name is " + fileName);
@@ -41,13 +39,13 @@ public class FileService {
         try {
             file.transferTo(dest);
           //  System.out.println("file was saved as " + filePath);
-            return new SuccessResult(filePath);
+            return Result.success(filePath);
         } catch (IllegalStateException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new ErrorResult("file didn't upload");
+        return Result.error("file didn't upload");
 
     }
 
