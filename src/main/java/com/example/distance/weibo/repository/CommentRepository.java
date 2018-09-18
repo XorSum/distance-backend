@@ -9,5 +9,5 @@ public interface CommentRepository extends CrudRepository<Comment,Integer> {
 
     Iterable<Comment> findAllByWeiboIdOrderByDate(Integer weiboId);
     Comment findOneByCommentId(Integer commentId);
-
+    Iterable<Comment> findAllByUserId(Integer userId);
 }

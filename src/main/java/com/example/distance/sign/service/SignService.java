@@ -9,9 +9,16 @@ import com.example.distance.utils.JwtUtils;
 import com.example.distance.utils.MD5;
 import com.example.distance.utils.SendSms;
 import com.example.distance.utils.result.Result;
+import com.example.distance.weibo.Model.Comment;
+import com.example.distance.weibo.Model.Weibo;
+import com.example.distance.weibo.repository.CommentRepository;
+import com.example.distance.weibo.repository.WeiboRepository;
+import io.swagger.models.auth.In;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -22,6 +29,12 @@ public class SignService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    CommentRepository commentRepository;
+
+    @Autowired
+    WeiboRepository weiboRepository;
 
 
     public Result signin(String phonenumber,String firstpassword){
@@ -85,7 +98,22 @@ public class SignService {
 
     }
     
-
+    public Result reName(Integer userId,String userName){
+        List<Weibo> weibos = weiboRepository.findAllByUserId(userId);
+        for (Weibo weibo:weibos){
+            weibo.setUserName(userName);
+            weiboRepository.save(weibo);
+        }
+        Iterable<Comment> comments = commentRepository.findAllByUserId(userId);
+        for (Comment comment:comments){
+            comment.setUserName(userName);
+            commentRepository.save(comment);
+        }
+        User user = userRepository.findOneById(userId);
+        user.setUserName(userName);
+        userRepository.save(user);
+        return Result.success();
+    }
 
 
 }
