@@ -80,5 +80,23 @@ public class WeiboService {
         return Result.success(ret);
     }
 
+    public Result searchByContent(String keyword){
+        List weibos = weiboRepository.findAllByContent(keyword);
+        if (weibos==null){
+            return Result.error("根据相关法律法规，部分搜索结果不予展示");
+        }else {
+            return Result.success(weibos);
+        }
+    }
+
+    public Result searchByUserName(String keyword){
+        List weibos = weiboRepository.findAllByUserName(keyword);
+        if (weibos==null){
+            return Result.error("根据相关法律法规，部分搜索结果不予展示");
+        }else {
+            return Result.success(weibos);
+        }
+    }
+
 
 }

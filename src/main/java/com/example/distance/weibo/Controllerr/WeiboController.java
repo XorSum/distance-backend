@@ -108,5 +108,20 @@ public class WeiboController {
         return weiboService.getPictures(weiboId);
     }
 
+    @ApiOperation(value = "搜索微博by用户名", notes = " 搜索微博，根据用户名 ", response = Weibo.class)
+    @GetMapping(value = "/search/userName/")
+    public Result searchByUserName(@ApiParam(value = "jwt" ,required=true ) @RequestParam String jwt,
+                              @ApiParam(value = "jwt" ,required=true ) @RequestParam String keyword) {
+        return weiboService.searchByUserName(keyword);
+    }
+
+    @ApiOperation(value = "搜索微博by内容", notes = " 搜索微博，根据用内容 ", response = Weibo.class)
+    @GetMapping(value = "/search/content/")
+    public Result searchByContent(@ApiParam(value = "jwt" ,required=true ) @RequestParam String jwt,
+                              @ApiParam(value = "jwt" ,required=true ) @RequestParam String keyword) {
+        return weiboService.searchByContent(keyword);
+    }
+
+
 
 }
