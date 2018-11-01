@@ -1,6 +1,9 @@
 package com.example.distance.utils.result;
 
 
+import com.example.distance.utils.GsonUtil;
+import com.google.gson.Gson;
+
 public class Result<T> {
 
     private int status;
@@ -60,6 +63,12 @@ public class Result<T> {
 
     public int getStatus() {
         return status;
+    }
+
+    @Override
+    public String toString() {
+        Gson gson = GsonUtil.getGsonInstance();
+        return gson.toJson(this);
     }
 
     public void setStatus(int status) {
