@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @IdClass(WeibiPictureMultikey.class)
+@Table(name = "weibo_picture")
 public class WeiboPicture {
 
     @Id

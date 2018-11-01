@@ -3,11 +3,13 @@ package com.example.distance.weibo.Model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.Table;
 import java.sql.Time;
 import java.util.Date;
 
 @Entity
 @IdClass(FocusMultiKey.class)
+@Table(name = "focus")
 public class Focus {
 
     @Id
