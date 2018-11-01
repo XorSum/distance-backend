@@ -1,5 +1,6 @@
 package com.example.distance.weibo.Controllerr;
 
+import com.example.distance.aop.annotation.LogAnnotation;
 import com.example.distance.utils.JwtUtils;
 import com.example.distance.utils.result.Result;
 import com.example.distance.weibo.Model.Weibo;
@@ -15,6 +16,7 @@ import java.lang.reflect.Array;
 
 @RestController
 @RequestMapping(value = "/weibo/")
+@LogAnnotation
 @Api("微博相关的api " +
         "创建微博使用方法" +
         "1. post create 创建一条空微博" +

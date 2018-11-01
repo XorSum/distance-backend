@@ -1,5 +1,6 @@
 package com.example.distance.weibo.Controllerr;
 
+import com.example.distance.aop.annotation.LogAnnotation;
 import com.example.distance.utils.JwtUtils;
 import com.example.distance.utils.result.Result;
 import com.example.distance.weibo.service.FocusService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/focus/")
+@LogAnnotation
 public class FocusController {
 
     @Autowired

@@ -1,5 +1,6 @@
 package com.example.distance.file;
 
+import com.example.distance.aop.annotation.LogAnnotation;
 import com.example.distance.utils.result.Result;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -22,6 +23,7 @@ import java.io.*;
  */
 @RestController
 @RequestMapping("/file/")
+@LogAnnotation
 public class FileController {
 
     @Autowired

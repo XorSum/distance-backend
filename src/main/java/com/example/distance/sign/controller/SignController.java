@@ -1,6 +1,7 @@
 package com.example.distance.sign.controller;
 
 
+import com.example.distance.aop.annotation.LogAnnotation;
 import com.example.distance.sign.service.SignService;
 import com.example.distance.utils.JwtUtils;
 import com.example.distance.utils.result.Result;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/sign/")
+@LogAnnotation
 public class SignController {
 
 
